@@ -1,14 +1,11 @@
 var XLSX=require('xlsx')
 //var Excel=require('exceljs')
 var wb=XLSX.readFile('./matches.xlsx')
-var wb2=XLSX.readFile('./deliveries.xlsx')
+//var wb2=XLSX.readFile('./deliveries.xlsx')
 var ws=wb.Sheets.Sheet1
 let array=XLSX.utils.sheet_to_json(wb.Sheets.Sheet1)
-let array2=XLSX.utils.sheet_to_json(wb2.Sheets.deliveries)
-//import readXlsxFile from 'read-excel-file/node'
- //var readXlsxFile=require('read-excel-file/node')
-// File path.
-console.log(array.length)
+//let array2=XLSX.utils.sheet_to_json(wb2.Sheets.deliveries)
+//console.log(array.length)
 let output={}
 for(let x in array){
 	if(output[array[x].season]){
@@ -52,20 +49,41 @@ let teams={
   	'Rising Pune Supergiants':0,
   	'Kings XI Punjab':0
   }
-  console.log(array2.length)
-for(let x in array2){
-//	console.log(array2[x].bowling_team)
+  //console.log(array2.length)
+  
+ let getMatchIds=function(year){
+ 		let matchIds=[];
+ 		let count=0;
+ 		for(let x in array){
+ 			if(array[x].season==year){
+ 				if(count==0){
+ 				matchIds.push(array[x].id)
+ 				count++;
+ 				}
+ 				else count++;
+ 			}
+ 		}
+ 		matchIds.push(matchIds[0]+count-1)
+ 		return matchIds;
+ }
+ console.log(getMatchIds(2008))
+//console.log(getMatchIds(2017))
+ /*
+for(let x in matchIds){
 	if(array2[x].match_id>=577){
 	if(array2[x].extra_runs)
 	teams[array2[x].bowling_team]+=array2[x].extra_runs
 }
 }
-console.log(teams)
-/*
+console.log(teams)*//*
+ var readXlsxFile=require('read-excel-file/node')
+// File path.
 readXlsxFile('./deliveries.xlsx').then((rows) => {
   // `rows` is an array of rows
-  // each row being an array of cells.150461
-  console.log(rows[0][0])
-})
+  // each row being an array of cells.
+  for(let i=1;i<10;i++){
+  	console.log(rows[i][1])
+  }
 
-//console.log(teams);*/
+})*/
+ 
