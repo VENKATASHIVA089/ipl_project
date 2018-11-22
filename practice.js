@@ -1,15 +1,14 @@
 var XLSX=require('xlsx')
-var Excel=require('exceljs')
+//var Excel=require('exceljs')
 var wb=XLSX.readFile('./matches.xlsx')
+var wb2=XLSX.readFile('./deliveries.xlsx')
 var ws=wb.Sheets.Sheet1
 let array=XLSX.utils.sheet_to_json(wb.Sheets.Sheet1)
-
+let array2=XLSX.utils.sheet_to_json(wb2.Sheets.deliveries)
 //import readXlsxFile from 'read-excel-file/node'
- var readXlsxFile=require('read-excel-file/node')
+ //var readXlsxFile=require('read-excel-file/node')
 // File path.
-/*
-
-*/
+console.log(array.length)
 let output={}
 for(let x in array){
 	if(output[array[x].season]){
@@ -42,7 +41,7 @@ for(let x in array){
 	}
 }
 //console.log(output2)
-
+//console.log(array2[0].match_id)
 let teams={
   	'Sunrisers Hyderabad':0,
   	'Royal Challengers Bangalore':0,
@@ -53,11 +52,20 @@ let teams={
   	'Rising Pune Supergiants':0,
   	'Kings XI Punjab':0
   }
-
+  console.log(array2.length)
+for(let x in array2){
+//	console.log(array2[x].bowling_team)
+	if(array2[x].match_id>=577){
+	if(array2[x].extra_runs)
+	teams[array2[x].bowling_team]+=array2[x].extra_runs
+}
+}
+console.log(teams)
+/*
 readXlsxFile('./deliveries.xlsx').then((rows) => {
   // `rows` is an array of rows
   // each row being an array of cells.150461
   console.log(rows[0][0])
 })
 
-//console.log(teams);
+//console.log(teams);*/
