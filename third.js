@@ -33,6 +33,8 @@ let getMatchIds=function(year){
  		return matchIds;
  }
 let range=getMatchIds(2016)
+console.log(range)
+//console.log(words[0][3],words[0][16])
 let extraRuns={}
 for(let row=1;row<words.length;row++){
 	if(words[row][0]>=range[0] && words[row][0]<=range[1]){
@@ -44,4 +46,31 @@ for(let row=1;row<words.length;row++){
 		}
 	}
 }
+
 console.log(extraRuns)
+let rangeForBowler=getMatchIds(2015)
+let bowlerEconomy={}
+for(let row=1;row<words.length;row++){
+	if(words[row][0]>=rangeForBowler[0] && words[row][0]<=rangeForBowler[1]){
+	if(bowlerEconomy[words[row][8]]){
+		if(!parseInt(words[row][10]) && !parseInt(words[row][13]))
+		bowlerEconomy[words[row][8]]['balls']++;
+		bowlerEconomy[words[row][8]]['runs']+=parseInt(words[row][17])
+	}
+	else{
+		let obj={}
+		obj['runs']=parseInt(words[row][17]);
+		if(!parseInt(words[row][10]) && !parseInt(words[row][13]))
+		obj['balls']=1
+		else obj['balls']=0
+		bowlerEconomy[words[row][8]]=obj;
+	}
+}
+}
+let arrayOfEconomies=[]
+for(bowler in bowlerEconomy){
+	let economy=bowlerEconomy[bowler]['runs']*6/bowlerEconomy[bowler]['balls']
+	arrayOfEconomies.push([bowler,economy])
+}
+arrayOfEconomies.sort((a,b)=>a[1]-b[1])
+console.log(arrayOfEconomies.slice(0,10))

@@ -37,36 +37,11 @@ for(let x in array){
 		output2[array[x].season][array[x].winner]=1;
 	}
 }
-//console.log(output2)
+console.log(output2)
 //console.log(array2[0].match_id)
-let teams={
-  	'Sunrisers Hyderabad':0,
-  	'Royal Challengers Bangalore':0,
-  	'Gujarat Lions':0,
-  	'Kolkata Knight Riders':0,
-  	'Delhi Daredevils':0,
-  	'Mumbai Indians':0,
-  	'Rising Pune Supergiants':0,
-  	'Kings XI Punjab':0
-  }
   //console.log(array2.length)
   
- let getMatchIds=function(year){
- 		let matchIds=[];
- 		let count=0;
- 		for(let x in array){
- 			if(array[x].season==year){
- 				if(count==0){
- 				matchIds.push(array[x].id)
- 				count++;
- 				}
- 				else count++;
- 			}
- 		}
- 		matchIds.push(matchIds[0]+count-1)
- 		return matchIds;
- }
- console.log(getMatchIds(2008))
+ 
 //console.log(getMatchIds(2017))
  /*
 for(let x in matchIds){
